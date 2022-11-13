@@ -1,0 +1,525 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+
+
+/* 
+CSS içerisinde yer alan değişkenler CSS değerlerini özel bir ifade olarak yazmaya imkan verir.
+Değişkenlere yazılan değerler CSS kurallarında var anahtar kelimesiyle kullanılır.
+Böylece aynı CSS değerleri sadece ilgili CSS değişkeni ile kolayca değiştirilir.
+
+Tanımlama
+CSS değişkenleri asagidaki gibi gibi çift tire işareti, değişken adı ve değişken değeri olarak tanımlanır.
+
+Detayli Bilgi
+https://www.yusufsezer.com.tr/css3-variables/
+ */
+
+:root{
+    --main-color:#e38528;
+}
+
+/* 
+1-  box-sizing: nedir ??
+box-sizing ise elementin içeriğinin genişlik ve yükseklik değerlerinin neresi referans alınarak belirlenmesini sağlar. Yani diyelim ki 300px genişliğinde bir div’imiz mevcut. Bu 300px genişlik tam olarak padding ve border’lar dahil mi yoksa padding ve border hariç mi sorusunun cevabını box-sizing kullanarak belirleyebilirsiniz.
+box-sizing initial ve inherit haricinde 2 adet değer alır. Bu değerler ve anlamları şu şekilde vuku bulmaktadır;
+border-box : elementin genişlik ve yüksekliğine border ve padding değerleri dahildir.
+content-box : elementin genişlik ve yüksekliğine border ve padding değerleri dahil değildir. 
+
+2- text-transform’un nedir ??
+lowercase uygulanan metindeki tüm harfleri küçük harfe çevirir.
+uppercase uygulanan metindeki tüm harfleri büyük harfe çevirir.
+capitalize uygulanan metindeki her kelimenin ilk harfini büyük harfe çevirir.
+none uygulanan metindeki küçük-büyük harfleri aynı girildiği gibi bırakır.
+inherit uygulanan metindeki küçük-büyük harfleri, ebeveyn öğenin küçük büyük harf kurallarına göre ayarlar
+
+3- transition: all .2s linear;
+Bir geçiş efekti oluşturmak için  kullanili ve iki şey belirtmelisiniz:
+(gecis efektini herseye uygulayabilirsiniz kutunun buyumesi renginin degismesi gibi)
+- efekt eklemek istediğiniz CSS özelliği
+- etkinin süresi
+
+*/
+*{
+    font-family: 'Roboto', sans-serif;
+    margin:0; padding:0;
+    box-sizing: border-box;
+    outline: none; border:none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+    line-height: 1.5;
+}
+
+
+/* 
+1- Overflow nedir ??
+
+Türkçeye taşmak(overflow) olarak çevirdiğimiz bu özellik sınırlarını belirlediğimiz kutu elementinin içeriğinin sınırları aşması durumunda nasıl davranacağını bildiren bir özelliktir. Özelliğe atanan değerleri tek tek incelersek.
+inherit - kalıtsallık üst elementin değerini alabilir
+visible - kutu sınırları dışına taşan alanları göster
+hidden - kutu sınırları dışına taşan alanları gizle.
+scroll - kutu sınırlarını taşan kısmı kaydırma çubuğu ile ulaşmamızı sağlar.
+auto - kutu sınırlarını aşması durumunda scroll ile aynı etkiyi yapar. 
+
+2- Scroll behavior nedir ??
+
+Scroll behavior özelliği ile o hedefe giderken animasyonlu gitmesini sağlayabiliriz. İki farklı değer alabilir. Bunlar;
+      ► auto : Varsayılan değerdir. Kaydırma efekti olmadan hedefe gider.
+      ► smooth : Link ile hedefe giderken kaydırma efekti sağlar.
+
+      Detayli bilgi
+https://www.mehsatek.com/css-scroll-behavior-kullanimi/      
+*/
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+
+body{
+    background: #fcf2e8;
+    padding-left: 30rem;
+}
+
+
+
+
+/* 
+1 - flex-flow: column;
+Flexbox kullanırken flex-flow özelliği aslında yeni bir özellik değildir ancak aynı anda flex-direction ve flex-wrap özelliklerini kullanmamız gerektiği durumlarda (aslında hemen her durumda her ikisini de yazıyoruz) her iki css özelliğini tek seferde yazabilmemizi sağlayan bir özellik.
+Detayli Bilgi
+https://www.reitix.com/merak/css-flexbox-flex-flow-nedir-ve-nasil-kullanilir/379d05c5 */
+
+header{
+    position: fixed;
+    top:0; left:0; bottom:0;
+    background:#222;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    flex-flow: column;
+    padding:8rem 2rem;
+
+    /* bu kismi ortalamak icin daha sonra ekledik */
+    width:30rem;
+    text-align: center;
+}
+
+/* Header duzeltmek icin */
+
+header .logo{
+    text-transform: uppercase;
+    color:#fff;
+    font-size: 3rem;
+    font-weight: bolder;
+}
+
+header .logo span{
+    text-transform: uppercase;
+    color:var(--main-color);
+}
+
+header .navbar a{
+    display: block;
+    font-size: 2rem;
+    color:#fff;
+    margin:2rem 0;
+}
+
+header .navbar a:hover{
+    letter-spacing: .2rem;
+    color:var(--main-color);
+}
+
+header .follow a{
+    font-size: 2.5rem;
+    color:#fff;
+    margin:0 .7rem;
+}
+
+header .follow a:hover{
+    color:var(--main-color);
+}
+
+
+
+/* VERSIYON 2 START */
+/* 
+versiyon-2-1 calisma */
+/* 1- pointer-events: none; yapmamizin sebebi dairelere fare ile tiklanmasin diye 
+2- transform: translate(-50%, -50%); icerdeki kucuk daireinin saga sola hareket etmesi icin kullandik
+
+3- z- index icin detayli bilgi
+ https://www.webcebir.com/153-css-z-index-nedir-dersi.html
+*/
+
+.cursor-1{
+    position: absolute;
+    top:0; left:0;
+    height:1rem; width:1rem;
+    background: var(--main-color);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 10000;
+}
+
+.cursor-1.active{
+    height:7rem;
+    width:7rem;
+    opacity: .3;
+}
+
+
+/* 1- transition: all .2s linear;
+Bir geçiş efekti oluşturmak için  kullanili ve iki şey belirtmelisiniz:
+(gecis efektini herseye uygulayabilirsiniz kutunun buyumesi renginin degismesi gibi)
+- efekt eklemek istediğiniz CSS özelliği
+- etkinin süresi */
+.cursor-2{
+    position: absolute;
+    top:0; left:0;
+    height:4rem; width:4rem;
+    border:.1rem solid var(--main-color);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 10000;
+    transition: .3s linear;
+}
+
+.cursor-2.active{
+    display: none;
+}
+
+/* VERSIYON 3 START */
+.home{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap:1.5rem;
+}
+
+/* flex:1 1 40rem; detayli ogrenmek icin https://developer.mozilla.org/en-US/docs/Web/CSS/flex */
+.home .image{
+    flex:1 1 40rem;
+}
+
+.home .image img{
+    width:100%;
+}
+
+.home .content{
+    flex:1 1 40rem;
+}
+
+.home .content .hi{
+    font-size: 2rem;
+    color:var(--main-color);
+}
+
+.home .content h3{
+    font-size: 4.5rem;
+    color:#111;
+    text-transform: uppercase;
+}
+
+.home .content h3 span{
+    color:var(--main-color);
+    text-transform: uppercase;
+}
+
+.home .content .info{
+    font-size: 2.5rem;
+    color:#111;
+    padding:.5rem 0;
+}
+
+.home .content .text{
+    font-size: 1.7rem;
+    color:#666;
+    padding:.5rem 0;
+}
+
+section{
+    padding:1rem 5%;
+    min-height: 100vh;
+}
+
+.btn{
+    display: inline-block;
+    margin-top: 1rem;
+    padding:.8rem 3rem;
+    background:var(--main-color);
+    color:#fff;
+    cursor: pointer;
+    font-size: 1.7rem;
+}
+
+.btn:hover{
+    background:#111;
+    letter-spacing: .2rem;
+}
+/* VERSIYON 3 END */
+
+
+
+/* VERSIYON 4 start */
+
+/* VERSIYON 4-1 */
+.heading{
+    font-size: 4rem;
+    padding-bottom: 1rem;
+    color:#111;
+    text-transform: uppercase;
+}
+
+.heading span{
+    color:var(--main-color);
+    text-transform: uppercase;
+}
+/* VERSIYON 4-1 */
+
+/* VERSIYON 4-2 */
+/* Gap CSS Özellikleri
+gap CSS özelliği flexbox, grid ve multi-column yapılarda esnek öğeler arasındaki boşluğu ayarlamak için kullanılmaktadır. */
+.about .row-1{
+    display: flex;
+    flex-wrap: wrap;
+    gap:1.5rem;
+    padding-bottom: 2rem;
+}
+.about .row-1 .image{
+    flex:1 1 25rem;
+}
+
+/* Object fit özelliği, resim veya videolarımızı ebeveyn etiketleri içerisinde uygun bir şekilde boyutlandırmamızı sağlar.
+5 değer verebiliyoruz. Bunlar;
+      ► contain : Resmin genişlik ve yükseklik değerlerinden büyük olanı, uygulandığı etiketi kapsayacak şekilde yerleştirilir. Diğer küçük olanıda buna göre en boy oranı bozulmayacak şekilde değişir.
+      ► cover : Resmin genişlik ve yükseklik değerlerinden küçük olanı, uygulandığı etiketi kapsayacak şekilde yerleştirilir. Diğer küçük olanıda buna göre en boy oranı bozulmayacak şekilde değişir.
+      ► fill : Varsayılan değerdir. Resim içerisinde bulunduğu nesneyi tamamen kaplar. En boy oranı korunmayacağı için görüntü bozulur.
+      ► none : Resmin orjinal boyutları korunur ve ebeveyn etiketinden taşan kısımlar kırpılır.
+      ► scale-down : Resmin en küçük boyutunu bulmak için none ve contain karşılaştırılması yapılır. Küçük olan uygulanır. */
+
+.about .row-1 .image img{
+    height: 100%;
+    width:100%;
+    object-fit: cover;
+    border:1rem solid #fff;
+    border-radius: .5rem;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+}
+.about .row-1 .content{
+    flex:1 1 50rem;
+}
+/* VERSIYON 4-2 */
+
+
+/* VERSIYON 4-3 */
+.about .row-1 .content h3{
+    color:#333;
+    font-size: 3.5rem;
+}
+
+.about .row-1 .content p{
+    color:#666;
+    font-size: 1.7rem;
+    padding:.5rem 0;
+}
+
+.about .row-1 .content .box-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap:1.5rem;
+    padding: 0.5rem 0;
+}
+
+.about .row-1 .content .box-container .box{
+    flex:1 1 20rem;
+}
+
+.about .row-1 .content .box-container .box span{
+    color:var(--main-color);
+}
+/* VERSIYON 4-3 */
+
+
+/* VERSIYON 5-1 */
+.about .row-2{
+    display: flex;
+    flex-wrap: wrap;
+    gap:1.5rem;
+    align-items: center;
+}
+
+.about .row-2 .skills{
+    flex:1 1 40rem;
+}
+
+.about .row-2 .skills .progress{
+    padding:1rem 0;
+}
+
+.about .row-2 .skills .progress h3{
+    display: flex;
+    justify-content: space-between;
+    padding:.7rem 0;
+    font-size: 1.7rem;
+    color:#111;
+    font-weight: 400;
+}
+
+.about .row-2 .skills .progress .bar{
+    width:100%;
+    background:#ccc;
+    overflow:hidden;
+    height:1rem;
+    border-radius: 50rem;
+}
+.about .row-2 .box-container{
+    flex:1 1 40rem;
+}
+/* VERSIYON 5-1 */
+
+/* VERSIYON 5-2 */
+.about .row-2 .skills .progress .bar span{
+    display:block;
+    height:100%;
+    background:var(--main-color);
+    border-radius: 50rem;
+}
+/* VERSIYON 5-2 -------*/
+.about .row-2 .skills .progress:nth-child(1) .bar span{
+    width:95%;
+}
+
+.about .row-2 .skills .progress:nth-child(2) .bar span{
+    width:80%;
+}
+
+.about .row-2 .skills .progress:nth-child(3) .bar span{
+    width:75%;
+}
+
+.about .row-2 .skills .progress:nth-child(4) .bar span{
+    width:85%;
+}
+/* VERSIYON 5-2 */
+
+/* VERSIYON 5-3 */
+.about .row-2 .box-container{
+    flex:1 1 40rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap:1.5rem;
+}
+
+.about .row-2 .box-container .box{
+    flex:1 1 15rem;
+    background:#fff;
+    padding:2rem;
+    border-radius: .5rem;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+}
+
+.about .row-2 .box-container .box h3{
+    color:var(--main-color);
+    font-size: 3rem;
+}
+
+.about .row-2 .box-container .box p{
+    color:#666;
+    font-size: 1.7rem;
+    padding-top: .5rem;
+}
+/* VERSIYON 5-3 */
+
+
+
+/* VERSIYON 6-1 */
+.service .box-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap:1.5rem;
+}
+
+.service .box-container .box{
+    flex:1 1 30rem;
+    text-align: center;
+    padding:2rem;
+    background:#fff;
+    border-radius: .5rem;
+    box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+}
+/* VERSIYON 6-1 */
+/* VERSIYON 6-2 */
+.service .box-container .box i{
+    height:6rem;
+    width:6rem;
+    line-height: 6rem;
+    font-size: 2.5rem;
+    color:#fff;
+    background:var(--main-color);
+    border-radius: 50%;
+}
+/* VERSIYON 6-2 */
+.service .box-container .box h3{
+    color:#444;
+    font-size: 2.2rem;
+    padding-top: 1rem;
+}
+
+.service .box-container .box p{
+    color:#666;
+    font-size: 1.7rem;
+    padding-top: .5rem;
+}
+
+/* VERSIYON 6-2 */
+/* media queries  */
+@media (max-width:991px){
+
+    html{
+        font-size: 55%;
+    }
+    
+    body{
+        padding: 0;
+    }
+
+    #menu-bars{
+        display: initial;
+    }
+
+    header{
+        left:-120%;
+    }
+
+    header.active{
+        left:0%;
+    }
+
+    .cursor-1,
+    .cursor-2{
+        display: none;
+    }
+
+}
+
+@media (max-width:450px){
+
+    html{
+        font-size: 50%;
+    }
+
+    header{
+        width:100%;
+    }
+
+    .experience .box-container .box{
+        padding-right: 0;
+    }
+
+}
